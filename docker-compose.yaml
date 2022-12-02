@@ -1,0 +1,49 @@
+---
+services:
+  webserver:
+    image: "nginx:1.23"
+    ports:
+      - target: 80
+        published: 8080
+        protocol: tcp
+        mode: host
+    networks:
+     - myweb  
+  webserver2:
+    image: "httpd"
+    ports:
+      - target: 80
+        published: 8082
+        protocol: tcp
+        mode: host
+    networks:
+     - myweb1    
+  dbserver:
+    image: mysql:5.6
+    ports:
+      - target: 3306
+        published: 8802
+        protocol: tcp
+        mode: host    
+networks:
+  myweb:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.101.0/24
+  myweb1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.10.0/24  
+volumes:
+  bitvol:
+    driver: bitvol
+    name: bit
+
+                    
+    
+
+
+          
+ 
