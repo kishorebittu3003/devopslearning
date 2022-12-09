@@ -1,0 +1,12 @@
+pipeline{
+    agent{ label 'dockers'}
+    stages{
+           stage('manual_steps_leraning'){
+            steps{
+                   sh 'docker image pull kishorekumar3003/student-course-api:4.0'
+                   sh 'docker image build -t tired .'
+                   sh 'docker container run -d -P tired'
+            }
+        }
+    }
+}

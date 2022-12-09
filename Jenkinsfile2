@@ -1,0 +1,21 @@
+pipeline{
+    agent{ label 'dockers'}
+    stages{
+        stage('clonning_the_url'){
+            steps{
+                    git url : 'https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git',
+                    branch : 'master'
+
+                }
+        }
+        stage('manual_steps_leraning'){
+            steps{
+                   sh 'docker image rm -f $(docker image ls -q)'  
+                   sh 'docker image build -t student-course-api:4.0 .'
+                   sh 'docker image tag student-course-api:4.0 kishorekumar3003/student-course-api:4.0'
+                   sh 'docker image push kishorekumar3003/student-course-api:4.0'
+                   
+            }
+        }
+    }
+}
